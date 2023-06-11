@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    >
+    <data>
+        <variable
+            name="viewmodel"
+            type="com.example.pizzanation.signin.SignInViewModel" />
+
+    </data>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".signin.SignIn">
+        <TextView
+            android:id="@+id/sign_in"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="SIGN IN"
+            android:layout_marginTop="48dp"
+            android:textSize="32sp"
+            android:textStyle="bold"
+            app:layout_constraintHorizontal_bias="0.116"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/username_signin_box"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:layout_marginTop="65dp"
+            android:layout_marginStart="25dp"
+            android:text="@string/username"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/sign_in" />
+
+        <EditText
+            android:id="@+id/username_sign_in"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="140dp"
+            android:ems="10"
+            android:text="@{viewmodel.username}"
+            android:inputType="textPersonName"
+            android:textSize="15sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/username_signin_box" />
+
+        <TextView
+            android:id="@+id/password_signin_box"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:text="@string/password"
+            android:textStyle="bold"
+            android:layout_marginStart="25dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/username_signin_box" />
+
+        <EditText
+            android:id="@+id/password_sign_in"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="140dp"
+            android:ems="10"
+            android:text="@{viewmodel.password}"
+            android:inputType="textPassword"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/password_signin_box" />
+
+        <Button
+            android:id="@+id/sign_in_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="284dp"
+            android:backgroundTint="#0197f6"
+            android:text="Sign In"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.464"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/sign_up_link"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="90dp"
+            android:layout_marginTop="32dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:textSize="13sp"
+            android:text="@string/click_here"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/sign_in_button" />
+
+        <TextView
+            android:id="@+id/dont_have_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:textSize="13sp"
+            android:text="if you don't have an account"
+            app:layout_constraintStart_toEndOf="@+id/sign_up_link"
+            app:layout_constraintTop_toTopOf="@+id/sign_up_link" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
+
+

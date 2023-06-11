@@ -1,0 +1,35 @@
+<resources>
+    <string-array name="toppings">
+        <item>Grilled Mushrooms</item>
+        <item>Onion</item>
+        <item>Crisp Capsicum</item>
+        <item>Fresh Tomato</item>
+        <item>Paneer</item>
+        <item>Red pepper</item>
+        <item>Jalapeno</item>
+        <item>Black Olive</item>
+    </string-array>
+    <string-array name="crust_select">
+        <item>small</item>
+        <item>New Hand Tossed</item>
+        <item>100% Wheat Thin Crust</item>
+        <item>Cheese Burst</item>
+        <item>Fresh Pan Pizza</item>
+        <item>Classic Hand Tossed</item>
+    </string-array>
+    <string name="app_name">PizzaNation</string>
+    <string name="email">Email</string>
+    <string name="name">Name</string>
+    <string name="username">username</string>
+    <string name="password">Password</string>
+    <string name="phone">Phone</string>
+    <string name="sign_up">SIGN UP</string>
+    <string name="city">City</string>
+
+    <string name="click_here">click_here</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="home_button">home_button</string>
+    <string name="cart_button">cart_button</string>
+    <string name="veg_extraveganza">VEG EXTRAVEGANZA</string>
+</resources>

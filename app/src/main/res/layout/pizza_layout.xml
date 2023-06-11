@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="350dp"
+    android:layout_height="wrap_content"
+    android:paddingBottom="10dp"
+    android:layout_gravity="center|top"
+    android:background="#6ABD"
+    android:layout_marginTop="10dp"
+    >
+
+
+    <ImageView
+        android:id="@+id/edible_image"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_gravity="center"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:scaleType="fitXY"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/pizza_icon" />
+
+    <TextView
+        android:id="@+id/item_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="itemPrice"
+        android:textSize="19sp"
+        android:textStyle="bold"
+        android:textColor="@color/material_dynamic_neutral10"
+        android:layout_marginRight="20dp"
+        app:layout_constraintEnd_toEndOf="@id/edible_image"
+        app:layout_constraintTop_toTopOf="@+id/edible_image" />
+
+    <LinearLayout
+        android:id="@+id/adjust_quantity"
+        android:layout_width="85dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="10dp"
+        android:visibility="invisible"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="@+id/edible_image"
+        app:layout_constraintTop_toBottomOf="@+id/description">
+
+        <ImageButton
+            android:id="@+id/plus"
+            android:layout_width="8dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:background="#00000000"
+            android:scaleType="fitXY"
+            app:srcCompat="@drawable/plus" />
+
+        <TextView
+            android:id="@+id/quantity"
+            android:layout_width="10dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="0"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+
+        <ImageButton
+            android:id="@+id/minus"
+            android:layout_width="5dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:background="#00000000"
+            android:scaleType="fitXY"
+            app:srcCompat="@drawable/minus" />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/add_to_cart"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="8dp"
+        android:layout_weight="1"
+        android:text="ADD TO CART"
+        android:backgroundTint="#4CBB17"
+        tools:layout_editor_absoluteX="175dp"
+        tools:layout_editor_absoluteY="240dp"
+        app:layout_constraintTop_toBottomOf="@+id/description"
+        app:layout_constraintEnd_toEndOf="@+id/edible_image"/>
+
+    <!-- "dialog" is an attribute for multiline spinner  -->
+    <androidx.appcompat.widget.AppCompatSpinner
+        android:id="@+id/crust_select"
+        android:layout_width="160dp"
+        android:layout_height="wrap_content"
+        android:gravity="start"
+        android:textSize="6sp"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="0dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/description" />
+
+    <TextView
+        android:id="@+id/description"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:height="65dp"
+        android:textSize="12sp"
+        android:gravity="left"
+        android:text="description"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/title" />
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="10dp"
+        android:text="TextView"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edible_image" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
