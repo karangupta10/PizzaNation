@@ -13,6 +13,7 @@ import kotlin.coroutines.coroutineContext
 class PizzaModel(edibles: MutableLiveData<ArrayList<Edible>>,pizzaViewModel: PizzasViewModel) {
     public lateinit var pizzaref: DatabaseReference
     public lateinit var edibles: ArrayList<Edible>
+    public lateinit var ediblePics: HashMap<String,String>
     public lateinit var pizzaViewModel: PizzasViewModel
 
     init{
@@ -22,6 +23,7 @@ class PizzaModel(edibles: MutableLiveData<ArrayList<Edible>>,pizzaViewModel: Piz
         pizzaref.addValueEventListener(object: ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 this@PizzaModel.edibles = ArrayList<Edible>()
+                this@PizzaModel.ediblePics = HashMap<String,String>()
                 for (snapshot: DataSnapshot in dataSnapshot.child("edibles").children) {
                     val edible: String = snapshot.key.toString()
                     val description: String =
@@ -38,6 +40,11 @@ class PizzaModel(edibles: MutableLiveData<ArrayList<Edible>>,pizzaViewModel: Piz
                 }
                 this@PizzaModel.pizzaViewModel.edibles.value = this@PizzaModel.edibles
                 //setEdibles()
+                for(snapshot: DataSnapshot in dataSnapshot.child("pictures").children){
+                    ediblePics.put(snapshot.key.toString(),snapshot.value.toString())
+                }
+                this@PizzaModel.pizzaViewModel.ediblePics.value = this@PizzaModel.ediblePics
+
             }
             override fun onCancelled(error: DatabaseError) {
                 // Failed to read value
@@ -55,5 +62,7 @@ class PizzaModel(edibles: MutableLiveData<ArrayList<Edible>>,pizzaViewModel: Piz
     public fun setEdibles(){
         this.edibles = pizzaViewModel.edibles.value!!
     }
-
+    public fun setEdiblePics(){
+        this.ediblePics = pizzaViewModel.ediblePics.value!!
+    }
 }

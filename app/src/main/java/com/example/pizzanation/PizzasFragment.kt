@@ -90,11 +90,18 @@ class PizzasFragment(fragment:String) : Fragment(R.layout.fragment_pizzas) {
         //setContentView(MainActivity::class.java,R.layout.fragment_pizzas)
         val pizzasViewModel:PizzasViewModel = ViewModelProvider(this,PizzasViewModelFactory())[PizzasViewModel::class.java]//= PizzasViewModel()//by viewModels()
         edibles = ArrayList<Edible>()
+
         val edibleObserver = Observer<ArrayList<Edible>>{ newList->
             edibles = newList
-            setRecyclerViewAdapter(newList)
+            pizzasViewModel.ediblePics.value?.let { setRecyclerViewAdapter(newList, it) }
         }
         pizzasViewModel.edibles.observe(viewLifecycleOwner,edibleObserver)
+
+        val ediblePicsObserver = Observer<HashMap<String,String>>{newPicList->
+            setRecyclerViewAdapter(edibles,newPicList)
+        }
+        pizzasViewModel.ediblePics.observe(viewLifecycleOwner,ediblePicsObserver)
+
         this.contex = context?.applicationContext
         myDBHandler = MyDBHandler(this@PizzasFragment.requireContext())
         var roomDatabase: RoomDatabase = Room.databaseBuilder(
@@ -181,14 +188,14 @@ class PizzasFragment(fragment:String) : Fragment(R.layout.fragment_pizzas) {
         if(this.fragment == "sides")
             return
     }
-    fun setRecyclerViewAdapter(edibles:ArrayList<Edible>){
+    fun setRecyclerViewAdapter(edibles:ArrayList<Edible>,ediblePics:HashMap<String,String>){
         val itemList:ArrayList<Edible> = ArrayList<Edible>()
         for(item:Edible in edibles) {
             // sides / pizzas
             if(this.fragment.equals(item.category.toString()))
                 itemList.add(item)
         }
-        this.adapter = itemsAdapter(itemList, requireContext(),this.myDBHandler)
+        this.adapter = itemsAdapter(itemList, ediblePics, requireContext(),this.myDBHandler)
         binding.itemsRecyclerView.adapter = this.adapter
         binding.itemsRecyclerView.layoutManager = LinearLayoutManager(context)
         //Toast.makeText(context,"onViewCreated .... 1232"+edibles.size,Toast.LENGTH_SHORT).show()

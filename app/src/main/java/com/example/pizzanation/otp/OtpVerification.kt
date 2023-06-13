@@ -3,11 +3,17 @@ package com.example.pizzanation.otp
 import android.content.ContentValues.TAG
 import android.os.Bundle
 import android.util.Log
+import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.DataBindingUtil
 import com.example.pizzanation.R
+import com.example.pizzanation.databinding.ActivityOtpVerificationBinding
+import com.example.pizzanation.main.MainActivity
 import com.google.firebase.FirebaseException
 import com.google.firebase.FirebaseTooManyRequestsException
 import com.google.firebase.auth.*
+import com.google.firebase.auth.PhoneAuthProvider.OnVerificationStateChangedCallbacks
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import java.io.FileInputStream
@@ -18,8 +24,10 @@ import kotlin.time.DurationUnit
 
 class OtpVerification : AppCompatActivity() {
 
+    lateinit var binding:ActivityOtpVerificationBinding
+    lateinit var mobile:String
     var auth: FirebaseAuth = Firebase.auth
-    lateinit var callbacks: Callback
+    lateinit var callbacks: OnVerificationStateChangedCallbacks
     override fun onStart(){
         super.onStart()
         val currentUser = auth.currentUser
@@ -35,32 +43,26 @@ class OtpVerification : AppCompatActivity() {
             .setPhoneNumber(phoneNumber) // Phone number to verify
             .setTimeout(60L,TimeUnit.SECONDS) // Timeout and unit
             .setActivity(this) // Activity (for callback binding)
-            //.setCallbacks(callbacks) // OnVerificationStateChangedCallbacks
+            .setCallbacks(callbacks) // OnVerificationStateChangedCallbacks
             .build()
         PhoneAuthProvider.verifyPhoneNumber(options)
 
     }
-    private fun signInWithPhoneAuthCredential(credential: PhoneAuthCredential) {
-        auth.signInWithCredential(credential)
-            .addOnCompleteListener(this) { task ->
-                if (task.isSuccessful) {
-                    // Sign in success, update UI with the signed-in user's information
-                    Log.d(TAG, "signInWithCredential:success")
-
-                    val user = task.result?.user
-                } else {
-                    // Sign in failed, display a message and update the UI
-                    Log.w(TAG, "signInWithCredential:failure", task.exception)
-                    if (task.exception is FirebaseAuthInvalidCredentialsException) {
-                        // The verification code entered was invalid
-                    }
-                    // Update UI
-                }
-            }
+    fun verifyPhone(view: View){
+        var phone = binding.phoneNumber.editableText.toString()
+        if(phone.length !=13 || phone[0] != '+' || phone[1] != '9' || phone[2] != '1'){
+            Toast.makeText(this,"Phone number is not entered correctly",Toast.LENGTH_SHORT)
+            return
+        }
+        mobile = ""
+        for(i in 3..12){
+            mobile+=phone[i]
+        }
+        authenticatePhone(mobile)
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_otp_verification)
+        binding = DataBindingUtil.setContentView(this,R.layout.activity_otp_verification)
         val serviceAccount = FileInputStream("path/to/serviceAccountKey.json")
 
         callbacks = object : PhoneAuthProvider.OnVerificationStateChangedCallbacks(), Callback {
@@ -110,5 +112,23 @@ class OtpVerification : AppCompatActivity() {
         auth = Firebase.auth
 
 
+    }
+    private fun signInWithPhoneAuthCredential(credential: PhoneAuthCredential) {
+        auth.signInWithCredential(credential)
+            .addOnCompleteListener(this) { task ->
+                if (task.isSuccessful) {
+                    // Sign in success, update UI with the signed-in user's information
+                    Log.d(TAG, "signInWithCredential:success")
+
+                    val user = task.result?.user
+                } else {
+                    // Sign in failed, display a message and update the UI
+                    Log.w(TAG, "signInWithCredential:failure", task.exception)
+                    if (task.exception is FirebaseAuthInvalidCredentialsException) {
+                        // The verification code entered was invalid
+                    }
+                    // Update UI
+                }
+            }
     }
 }

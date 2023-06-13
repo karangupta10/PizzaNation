@@ -17,9 +17,10 @@ import com.example.pizzanation.cart.CartActivity
 import com.example.pizzanation.database.MyDBHandler
 import com.example.pizzanation.roomdb.PizzaDatabase
 import com.google.firebase.auth.ktx.oAuthProvider
+import com.squareup.picasso.Picasso
 import java.lang.Math.pow
 
-public class itemsAdapter(val itemsList:ArrayList<Edible>, val context: Context, myDBHandler: MyDBHandler): RecyclerView.Adapter<itemsAdapter.MyViewHolder>() {
+public class itemsAdapter(val itemsList:ArrayList<Edible>, val picsList:HashMap<String,String>, val context: Context, myDBHandler: MyDBHandler): RecyclerView.Adapter<itemsAdapter.MyViewHolder>() {
     //    public var roomDatabase:RoomDatabase = Room.databaseBuilder(
 //        context,
 //        PizzaDatabase::class.java, "database-name"
@@ -35,6 +36,8 @@ public class itemsAdapter(val itemsList:ArrayList<Edible>, val context: Context,
         holder.description.text = itemsList.get(position).description
         holder.title.text = itemsList.get(position).name
         holder.item_price.text = "Rs." + itemsList.get(position).price.toString()
+        //load image from URL using Picasso
+        Picasso.get().load(picsList[itemsList.get(position).name]).into(holder.edibleImage)
         var adapter:ArrayAdapter<CharSequence>? = null
         if(context != null)
             adapter  = ArrayAdapter.createFromResource(context, R.array.crust_select, android.R.layout.simple_spinner_item);

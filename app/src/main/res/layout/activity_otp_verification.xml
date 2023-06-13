@@ -25,6 +25,7 @@
         android:inputType="textPersonName"
         android:text="+91"
         android:layout_marginLeft="40dp"
+
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -36,12 +37,13 @@
         android:layout_marginLeft="8dp"
         android:backgroundTint="#FF7900"
         android:text="GET OTP"
+        android:onClick="verifyPhone"
         android:layout_marginTop="0dp"
         app:layout_constraintLeft_toRightOf="@+id/phone_number"
         app:layout_constraintTop_toTopOf="@+id/phone_number" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName2"
+        android:id="@+id/otp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
@@ -58,8 +60,8 @@
         android:text="Verify Otp"
         android:backgroundTint="#FF7900"
 
-        app:layout_constraintStart_toEndOf="@+id/editTextTextPersonName2"
-        app:layout_constraintTop_toTopOf="@+id/editTextTextPersonName2" />
+        app:layout_constraintStart_toEndOf="@+id/otp"
+        app:layout_constraintTop_toTopOf="@+id/otp" />
 </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>
